@@ -110,6 +110,76 @@
     color: #666;
     text-align: center;
 }
+
+    #feedback-whatsapp-max {
+        display: flex;
+        justify-content: center;
+        padding: 20px;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .card-zap {
+        background: #fff;
+        border-radius: 15px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        width: 100%;
+        max-width: 400px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+    }
+
+    .header-zap {
+        background: #d32f2f; /* Vermelho brasa */
+        color: white;
+        padding: 20px;
+        text-align: center;
+    }
+
+    .header-zap h3 { margin: 0; font-size: 1.4em; }
+    .header-zap p { margin: 5px 0 0; font-size: 0.85em; opacity: 0.9; }
+
+    #formZap { padding: 20px; }
+
+    #formZap label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #444;
+        font-size: 0.9em;
+    }
+
+    #formZap input, #formZap textarea {
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 15px;
+        border: 1.5px solid #ddd;
+        border-radius: 8px;
+        box-sizing: border-box;
+        font-size: 1em;
+    }
+
+    #formZap button {
+        background-color: #25D366; /* Verde WhatsApp */
+        color: white;
+        border: none;
+        padding: 15px;
+        width: 100%;
+        border-radius: 8px;
+        font-weight: bold;
+        font-size: 1.1em;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        transition: transform 0.2s;
+    }
+
+    #formZap button:hover {
+        background-color: #128C7E;
+        transform: scale(1.02);
+	}
+
  </style>
 </head>
 <body>
@@ -647,7 +717,47 @@
             </div>
         </div>
 
+    </div><div id="feedback-whatsapp-max">
+    <div class="card-zap">
+        <div class="header-zap">
+            <span class="icon-zap">🔥</span>
+            <h3>Avalie sua experiência!</h3>
+            <p>Rua Eucalipto, 48</p>
+        </div>
+        
+        <form id="formZap">
+            <label for="cliente">Seu Nome:</label>
+            <input type="text" id="cliente" placeholder="Como podemos te chamar?" required>
+
+            <label for="opiniao">O que achou do nosso Espetinho?</label>
+            <textarea id="opiniao" rows="3" placeholder="Ex: A carne estava divina!" required></textarea>
+
+            <button type="button" onclick="enviarParaWhatsapp()">
+                <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" width="20" alt="Zap">
+                Enviar Feedback para o Max
+            </button>
+        </form>
     </div>
+</div>
+
+<script>
+function enviarParaWhatsapp() {
+    const telefone = "5584981472386"; // <-- COLOQUE O WHATSAPP DO MAX AQUI (DDD + número)
+    const nome = document.getElementById('cliente').value;
+    const feedback = document.getElementById('opiniao').value;
+    
+    if(!nome || !feedback) {
+        alert("Por favor, preencha o nome e sua opinião!");
+        return;
+    }
+
+    const mensagem = `Olá, Max! Me chamo *${nome}* e vim deixar um feedback sobre o espetinho:\n\n"${feedback}"`;
+    const url = `https://wa.me/${telefone}?text=${encodeURIComponent(mensagem)}`;
+    
+    window.open(url, '_blank');
+}
+</script>
+	
     <div id="checkout-area">
         <div class="head-check">
             <h3>🛒 Meu Pedido</h3>
